@@ -4,6 +4,7 @@ var ctx;
 var pos = [0, 0];
 var velocity = [200, 200];
 var keymap = {};
+var img = new Image();
 
 var KEY_LEFT = 37;
 var KEY_UP = 38;
@@ -27,8 +28,11 @@ $(document).ready(function() {
         keymap[ev.keyCode] = false;
     });
 
-    // Start animation loop
-    requestAnimationFrame(render);
+    // Load images
+    img.onload = function() {
+        requestAnimationFrame(render);
+    };
+    img.src = 'images/spaceship.png';
 });
 
 function render(timestamp) {
@@ -56,7 +60,7 @@ function render(timestamp) {
 
     // Rendering
     ctx.clearRect(0, 0, cnvMain.width, cnvMain.height);
-    ctx.fillRect(pos[0], pos[1], 50, 50);
+    ctx.drawImage(img, pos[0], pos[1]);
 
     // End stuff
     lastTick = timestamp;
